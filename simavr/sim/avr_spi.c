@@ -36,6 +36,7 @@ avr_spi_raise(
 		if (avr_regbit_get(avr, p->mstr)) {
 			avr_raise_interrupt(avr, &p->spi);
 			avr_raise_irq(p->io.irq + SPI_IRQ_OUTPUT, avr->data[p->r_spdr]);
+			avr_core_watch_write(avr, p->r_spdr, 0);
 		}
 	}
 	return 0;
